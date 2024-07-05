@@ -1,0 +1,23 @@
+<launch>
+  <arg name="launch_driver" default="true"/>
+  <arg name="vehicle_id" default="$(env VEHICLE_ID default)"/>
+  <arg name="camera_type" default=""/>
+  <arg name="camera_topic" default="/sensing/camera/miivii_gmsl/image0"/>
+  <arg name="output/objects" default="/perception/object_recognition/detection/rois0"/>
+  <arg name="data_path" default="$(env HOME)/autoware_data" description="packages data and artifacts directory path"/>
+
+  <group>
+    <push-ros-namespace namespace="camera"/>
+      <group>
+        <include file="$(find-pkg-share miivii_gmsl_camera)/launch/single.launch" />
+      </group>
+
+      <group>
+        <include file="$(find-pkg-share tensorrt_yolox)/launch/yolox.launch.xml">
+          <arg name="input/image" value="$(var camera_topic)"/>
+          <arg name="output/objects" value="$(var output/objects)"/>
+          <arg name="data_path" value="$(var data_path)"/>
+        </include>
+      </group>
+  </group>
+</launch>

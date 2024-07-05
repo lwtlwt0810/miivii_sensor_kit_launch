@@ -1,1 +1,1 @@
-# miivii_sensor_kit_launch
+# sample_sensor_kit_launch
