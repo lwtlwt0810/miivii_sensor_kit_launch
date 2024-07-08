@@ -17,6 +17,7 @@
           <arg name="input/image" value="$(var camera_topic)"/>
           <arg name="output/objects" value="$(var output/objects)"/>
           <arg name="data_path" value="$(var data_path)"/>
+          <arg name="use_decompress" value="false"/>
         </include>
       </group>
   </group>
